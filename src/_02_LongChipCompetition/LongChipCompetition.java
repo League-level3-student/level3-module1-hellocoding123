@@ -11,12 +11,39 @@ public class LongChipCompetition {
      * Beatle classes. Make sure to initialize The Beatles before you start
      * your search.
      */
+	
     private ArrayList<Beatle> theBeatles = new ArrayList<Beatle>();
 
     public static void main(String[] args) {
         LongChipCompetition lcc = new LongChipCompetition();
+    
+        lcc.initializeBeatles();
+        String longestChipBeatle;
         
-       
+        double biggestChip;
+        ArrayList<Double> biggestChips = new ArrayList<>();
+        
+        for(int i = 0; i < lcc.getTheBand().size(); i++) {
+        	biggestChip = 0;
+        	for(int j = 0; j < lcc.getTheBand().get(i).getChips().size(); j++) {
+        		if(lcc.getTheBand().get(i).getChips().get(j).getLength() > biggestChip) {
+        			biggestChip = lcc.getTheBand().get(i).getChips().get(j).getLength();
+        		}
+        	}
+        	biggestChips.add(biggestChip);
+        }
+        
+        int biggestChipIndex = 0;
+        biggestChip = 0;
+        
+        for(int i = 0; i < biggestChips.size(); i++) {
+        	if(biggestChips.get(i) > biggestChip) {
+        		biggestChip =biggestChips.get(i);
+        		biggestChipIndex = i;
+        	}
+        }
+        
+        System.out.println(lcc.getTheBand().get(biggestChipIndex).getName() + " has the biggest chip with a length of " + biggestChips.get(biggestChipIndex));
 
     }
 
