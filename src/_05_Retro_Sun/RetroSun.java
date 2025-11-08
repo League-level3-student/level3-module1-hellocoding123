@@ -1,5 +1,7 @@
 package _05_Retro_Sun;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 /*
@@ -20,7 +22,9 @@ public class RetroSun extends PApplet {
             color(217, 0, 151) };
 
     int bgColor = color(31, 0, 48);
-
+    float y = (WIDTH / 2) + 50;
+    float h = 40;
+    Rectangle r = new Rectangle(0, y, 800, h);
     @Override
     public void settings() {
         // 1. Set the size of your sketch to at least 800 width, 600 height
@@ -31,6 +35,7 @@ public class RetroSun extends PApplet {
     public void setup() {
         // 2. Set bgColor as the background color
         background(bgColor);
+        
     }
 
     @Override
@@ -105,9 +110,9 @@ public class RetroSun extends PApplet {
     	fill(bgColor);
         // To draw each rectangle we need to find its x, y, width, height
         // *The y position can be any value within the sun:
-        float y = width / 2;
+     
         // *The height can be any value you choose:
-        float h = 40;
+        
         // *The x position can be the center of the sun's x position minus the radius:
         float x = 300 - 400;
         // *The width can be 2 times the radius
@@ -145,6 +150,14 @@ public class RetroSun extends PApplet {
 
         // The map() function will make the value of h = 1 if y is at the top,
         // and h = 40 if y is at the bottom.
+       
+    		
+    	float step = map(y, 400, 150, 40, 0);
+    	y--;
+    	h=step;
+    	   
+    		
+    	
 
         
         /*
@@ -157,8 +170,16 @@ public class RetroSun extends PApplet {
         // code you wrote for the 1 missing sun section.
         // HINT: You can use the Rectangle class defined below to create
         // a list of Rectangles.
-
-        
+    	ArrayList <Rectangle> rect = new ArrayList<Rectangle>();
+    	
+    	for(int i = 0; i < rect.size(); i++) {
+    		rect(rect.get(i).x, rect.get(i).y, rect.get(i).w, rect.get(i).h);
+    		rect.get(i).y--;
+    		
+    		if(rect.get(i).y == 300) {
+    			Rectangle r = new Rectangle(0, y, 800, h);
+    		}
+    	}
         /*
          * PART 6: Adding extras
          *
