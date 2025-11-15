@@ -23,8 +23,12 @@ public class RetroSun extends PApplet {
 
     int bgColor = color(31, 0, 48);
     float y = (WIDTH / 2) + 50;
-    float h = 40;
+    float h = 30;
     Rectangle r = new Rectangle(0, y, 800, h);
+    Rectangle r1 = new Rectangle(0, y + 70, 800, h);
+    Rectangle r2 = new Rectangle(0, y +140, 800, h);
+    Rectangle r3 = new Rectangle(0, y+210, 800, h);
+    ArrayList <Rectangle> rects = new ArrayList<Rectangle>();
     @Override
     public void settings() {
         // 1. Set the size of your sketch to at least 800 width, 600 height
@@ -35,6 +39,10 @@ public class RetroSun extends PApplet {
     public void setup() {
         // 2. Set bgColor as the background color
         background(bgColor);
+        rects.add(r);
+        rects.add(r1);
+        rects.add(r2);
+        rects.add(r3);
         
     }
 
@@ -151,12 +159,12 @@ public class RetroSun extends PApplet {
         // The map() function will make the value of h = 1 if y is at the top,
         // and h = 40 if y is at the bottom.
        
-    		
+    	/*	
     	float step = map(y, 400, 150, 40, 0);
     	y--;
     	h=step;
     	   
-    		
+    		*/
     	
 
         
@@ -170,14 +178,21 @@ public class RetroSun extends PApplet {
         // code you wrote for the 1 missing sun section.
         // HINT: You can use the Rectangle class defined below to create
         // a list of Rectangles.
-    	ArrayList <Rectangle> rect = new ArrayList<Rectangle>();
     	
-    	for(int i = 0; i < rect.size(); i++) {
-    		rect(rect.get(i).x, rect.get(i).y, rect.get(i).w, rect.get(i).h);
-    		rect.get(i).y--;
+    	
+    	for(int i = 0; i < rects.size(); i++) {
+    		fill(bgColor);
+    		rect(rects.get(i).x, rects.get(i).y, rects.get(i).w, rects.get(i).h);
     		
-    		if(rect.get(i).y == 300) {
-    			Rectangle r = new Rectangle(0, y, 800, h);
+    		float step = map(rects.get(i).y, 400, 150, 30, 0);
+        	rects.get(i).y--;
+        	rects.get(i).h=step;
+    		
+    		if(rects.get(i).y <= 150) {
+    			//Rectangle r = new Rectangle(0, y, 800, h);
+    			//rects.add(r);
+    			rects.get(i).y = (WIDTH/2) + 50;
+    			rects.get(i).h = 40;
     		}
     	}
         /*
