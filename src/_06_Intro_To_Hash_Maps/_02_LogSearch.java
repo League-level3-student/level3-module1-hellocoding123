@@ -1,7 +1,16 @@
 package _06_Intro_To_Hash_Maps;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
-public class _02_LogSearch {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class _02_LogSearch implements ActionListener {
     /*
      * Crate a HashMap of Integers for the keys and Strings for the values.
      * Create a GUI with three buttons.
@@ -33,5 +42,92 @@ public class _02_LogSearch {
      *      If this ID exists in the HashMap, remove it. Otherwise, notify the
      *      user that the ID is not in the list.
      */
+	
+	HashMap <Integer, String> hash = new HashMap <Integer, String>();
+	
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JButton button1 = new JButton("Add item");
+	JButton button2 = new JButton("Search value");
+	JButton button3 = new JButton("Show list");
+	JButton button4 = new JButton("Remove item");
+	
+	public static void main(String[] args) {
+		_02_LogSearch log = new _02_LogSearch();
+		
+		
+		
+		log.run();
+	}
+	
+	void run() {
+		
+		frame.add(panel);
+		panel.add(button1);
+		panel.add(button2);
+		panel.add(button3);
+		panel.add(button4);
+		
+		button1.addActionListener(this);
+		button2.addActionListener(this);
+		button3.addActionListener(this);
+		button4.addActionListener(this);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		frame.pack();
+		
+		
+	}
 
-}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == button1) {
+			int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID number"));
+			String name = JOptionPane.showInputDialog(null, "Enter a name");
+			
+			hash.put(id, name);
+		}
+		
+		if(e.getSource() == button2) {
+			int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID number"));
+			
+			if(hash.containsKey(id)) {
+				JOptionPane.showMessageDialog(null, hash.get(id));
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Does not exist");
+			}
+		}
+		
+		if(e.getSource() == button3) { 
+			
+			String list = "";
+			
+			for(Entry<Integer, String> entry : hash.entrySet()) {
+				list = list + "ID: " + entry.getKey() + " Name: " + entry.getValue() + "\n";
+			}
+			
+			JOptionPane.showMessageDialog(null, list);
+		}
+		
+		if(e.getSource() == button4) { 
+			
+			int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID number"));
+			
+			if(hash.containsKey(id)) {
+				hash.remove(id);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Does not exist");
+			}
+		}
+		
+		
+	}
+		
+		
+		
+		
+} 
